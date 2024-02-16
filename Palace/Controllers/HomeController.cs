@@ -15,11 +15,11 @@ public class HomeController : Controller
   [HttpGet("/")]
   public ActionResult Index()
   {
-    Bouquet[] bouquets = _db.Bouquets.ToArray();
-    Flower[] flowers = _db.Flowers.ToArray();
-    Dictionary<string, object[]> model = new Dictionary<string, object[]>();
-    model.Add("bouquets", bouquets);
-    model.Add("flowers", flowers);
-    return View(model);
+    // Bouquet[] bouquets = _db.Bouquets.ToArray();
+    // Flower[] flowers = _db.Flowers.ToArray();
+    // Dictionary<string, object[]> model = new Dictionary<string, object[]>();
+    // model.Add("bouquets", bouquets);
+    // model.Add("flowers", flowers);
+    return View();
   }
 }
