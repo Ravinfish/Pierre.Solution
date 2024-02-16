@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+@model Palace.Models.Bouquet
+@using Palace.Models
+
+<h2>Bouquet Details</h2>
+<hr />
+<div>
+  <h4>Name: @Model.Name</h4>
+  <h4>Size: @Model.Size</h4>
+  <h4>Price: @Html.DisplayFor(model => model.Price)</h4>
+</div>

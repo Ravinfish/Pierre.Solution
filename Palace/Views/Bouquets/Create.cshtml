@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+@model Palace.Models.Bouquet
+
+<h2>Create Bouquet</h2>
+<hr />
+<form asp-action="Create">
+  <div class="form-group">
+    <label asp-for="bouquet.Name" class="control-label"></label>
+    <input asp-for="bouquet.Name" type="text" placeholder="Name" />
+    <span asp-validation-for="bouquet.Name" class="text-danger"></span>
+  </div>
+  <br />
+  <div class="form-group">
+    <label asp-for="Size" class="control-label">Select Size:</label>
+    <select asp-for="Size" class="form-control">
+      <option value="Small">Small</option>
+      <option value="Medium">Medium</option>
+      <option value="Large">Large</option>
+      <option value="X-Large">X-Large</option>
+    </select>
+    <span asp-validation-for="Size" class="text-danger"></span>
+  </div>
+  <br />
+  <div class="form-group">
+    <input type="submit" value="Create" class="btn btn-primary" />
+  </div>
+</form>
