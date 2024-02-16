@@ -18,10 +18,10 @@ namespace Palace.Controllers
     }
     public ActionResult Index()
     {
-      List<Bouquet>  model = _db.Bouquets.ToList();
+      List<Bouquet> model = _db.Bouquets.ToList();
       return View(model);
     }
-     public ActionResult Create()
+    public ActionResult Create()
     {
       return View();
     }
@@ -35,9 +35,28 @@ namespace Palace.Controllers
       }
       else
       {
+        bouquet.Price = CalculatePrice(bouquet.Size);
         _db.Bouquets.Add(bouquet);
         _db.SaveChanges();
         return RedirectToAction("Index");
+      }
+    }
+
+    private decimal CalculatePrice(string size)
+    {
+      switch (size)
+      {
+        case "Small":
+          return 15.99m;
+        case "Medium":
+          return 20.99m;
+        case "Large":
+          return 30.99m;
+        case "X-Large":
+          return 40.99m;
+        default:
+          return 0m;
+
       }
     }
     public ActionResult Details(int id)
