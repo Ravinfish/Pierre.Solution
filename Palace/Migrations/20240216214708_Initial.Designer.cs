@@ -10,8 +10,8 @@ using Palace.Models;
 namespace Palace.Migrations
 {
     [DbContext(typeof(PalaceContext))]
-    [Migration("20240216203723_AddBouquetName")]
-    partial class AddBouquetName
+    [Migration("20240216214708_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -7,7 +7,7 @@
 <h2>Bouquet Details</h2>
 <hr />
 <div>
-  <h4>Name: @Model.Name</h4>
-  <h4>Size: @Model.Size</h4>
-  <h4>Price: @Html.DisplayFor(model => model.Price)</h4>
+  <h4>@Html.DisplayNameFor(model => model.Name): @Html.DisplayNameFor(model => model.Name)</h4>
+  <h4>@Html.DisplayNameFor(model => model.Size): @Html.DisplayNameFor(model => model.Size)</h4>
+  <h4>@Html.DisplayNameFor(model => model.Price): @Html.DisplayFor(model => model.Price)</h4>
 </div>

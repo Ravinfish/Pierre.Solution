@@ -31,7 +31,7 @@ namespace Palace.Controllers
     {
       if (!ModelState.IsValid)
       {
-        return View(bouquet);
+        return View("Create");
       }
       else
       {
@@ -61,10 +61,10 @@ namespace Palace.Controllers
     }
     public ActionResult Details(int id)
     {
-      Bouquet thisBouquet = _db.Bouquets
-      .Include(bouquet => bouquet.BouquetFlowers)
-      .ThenInclude(join => join.Flower)
-      .FirstOrDefault(bouquet => bouquet.BouquetId == id);
+      Bouquet thisBouquet = _db.Bouquets.FirstOrDefault(bouquet => bouquet.BouquetId == id);
+      // .Include(bouquet => bouquet.BouquetFlowers)
+      // .ThenInclude(join => join.Flower)
+      // .FirstOrDefault(bouquet => bouquet.BouquetId == id);
       return View(thisBouquet);
     }
 
