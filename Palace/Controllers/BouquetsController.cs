@@ -69,7 +69,7 @@ namespace Palace.Controllers
       return View(thisBouquet);
     }
 
-     public ActionResult Edit(int id)
+    public ActionResult Edit(int id)
     {
       Bouquet thisBouquet = _db.Bouquets.FirstOrDefault(bouquet => bouquet.BouquetId == id);
       // ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
@@ -79,9 +79,15 @@ namespace Palace.Controllers
     [HttpPost]
     public ActionResult Edit(Bouquet bouquet)
     {
-      _db.Bouquets.Update(bouquet);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      if (!ModelState.IsValid)
+      {
+        bouquet.Price = CalculatePrice(bouquet.Size);
+
+        _db.Bouquets.Update(bouquet);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
+      return View(bouquet);
     }
 
     public ActionResult Delete(int id)

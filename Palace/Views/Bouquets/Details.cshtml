@@ -11,3 +11,6 @@
   <h4>@Html.DisplayNameFor(model => model.Size): @Html.DisplayFor(model => model.Size)</h4>
   <h4>@Html.DisplayNameFor(model => model.Price): @Html.DisplayFor(model => model.Price)</h4>
 </div>
+
+<p>@Html.ActionLink("Update Bouquet", "Edit", new { id = Model.BouquetId })</p>
+<p>@Html.ActionLink("Delete Bouquet", "Delete", new { id = Model.BouquetId })</p>
