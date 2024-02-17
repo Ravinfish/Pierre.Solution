@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
+
 namespace Palace.Controllers
 {
   public class BouquetsController : Controller
@@ -31,7 +32,7 @@ namespace Palace.Controllers
     {
       if (!ModelState.IsValid)
       {
-        return View("Create");
+        return View(bouquet);
       }
       else
       {
@@ -66,6 +67,36 @@ namespace Palace.Controllers
       // .ThenInclude(join => join.Flower)
       // .FirstOrDefault(bouquet => bouquet.BouquetId == id);
       return View(thisBouquet);
+    }
+
+     public ActionResult Edit(int id)
+    {
+      Bouquet thisBouquet = _db.Bouquets.FirstOrDefault(bouquet => bouquet.BouquetId == id);
+      // ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
+      return View(thisBouquet);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Bouquet bouquet)
+    {
+      _db.Bouquets.Update(bouquet);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult Delete(int id)
+    {
+      Bouquet thisBouquet = _db.Bouquets.FirstOrDefault(bouquet => bouquet.BouquetId == id);
+      return View(thisBouquet);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Bouquet thisBouquet = _db.Bouquets.FirstOrDefault(bouquet => bouquet.BouquetId == id);
+      _db.Bouquets.Remove(thisBouquet);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
 
   }
