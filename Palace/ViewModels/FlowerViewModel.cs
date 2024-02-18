@@ -16,5 +16,6 @@ namespace Palace.ViewModels
         public bool IsBouquet { get; set; }
         public string BouquetName { get; set; }
         public string BouquetSize { get; set; }
+        
     }
 }
