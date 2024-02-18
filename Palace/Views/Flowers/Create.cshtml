@@ -1,23 +1,50 @@
 @{
   Layout = "_Layout";
 }
-@model Palace.Models.Flower
 
-<h2>Add Flowers</h2>
-<hr />
+@model Palace.ViewModels.FlowerViewModel
+
+<h2>Select Flower</h2>
 @using (Html.BeginForm())
 {
-  <Label for="FlowerId">Select Flower:</Label>
-  @Html.DropDownListFor(model => model.FlowerId)
-  <br />
-  @Html.LabelFor(model => model.Size)
-  @Html.DropDownListFor(model => model.Size, new SelectList(new[]
-  {
-    new SelectListItem { Text = "Small", Value = "Small"},
-    new SelectListItem { Text = "Medium", Value = "Medium"},
-    new SelectListItem { Text = "Large", Value = "Large"},
-    new SelectListItem { Text = "X-Large", Value = "X-Large"},
-  }, "Value", "Text"), "Select Size")
-  @Html.ValidationMessageFor(model => model.Size, "")
-  <input type="submit" value="Create"  />
+    <div>
+        @Html.CheckBoxFor(model => model.IsBouquet, new { @class = "form-check-input" })
+        @Html.LabelFor(model => model.IsBouquet, "Add to Bouquet", new { @class = "form-check-label" })
+    </div>
+    <div>
+        @Html.LabelFor(model => model.FlowerId)
+        @Html.DropDownListFor(model => model.FlowerId, Model.FlowerOptions, "Select Flower")
+        @Html.ValidationMessageFor(model => model.FlowerId)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Quantity)
+        @Html.EditorFor(model => model.Quantity)
+        @Html.ValidationMessageFor(model => model.Quantity)
+    </div>
+    <div id="bouquetFields" style="display: none;">
+        <div>
+            @Html.LabelFor(model => model.BouquetName)
+            @Html.EditorFor(model => model.BouquetName)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.BouquetSize)
+            @Html.EditorFor(model => model.BouquetSize)
+        </div>
+    </div>
+    <input type="submit" value="Submit">
+}
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#IsBouquet').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#bouquetFields').show();
+                } else {
+                    $('#bouquetFields').hide();
+                }
+            });
+        });
+    </script>
 }

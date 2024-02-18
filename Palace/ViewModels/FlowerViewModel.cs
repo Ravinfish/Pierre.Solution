@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Palace.ViewModels
 {
-    public class SingleFlower
+    public class FlowerViewModel
     {
         [Required(ErrorMessage = "Please select a flower.")]
         public int FlowerId { get; set; }
@@ -13,8 +13,8 @@ namespace Palace.ViewModels
         public int Quantity { get; set; }
 
         public IEnumerable<SelectListItem> FlowerOptions { get; set; }
-
-        public string Description { get; set; }
-        public decimal IndividualCost { get; set; }
+        public bool IsBouquet { get; set; }
+        public string BouquetName { get; set; }
+        public string BouquetSize { get; set; }
     }
 }
