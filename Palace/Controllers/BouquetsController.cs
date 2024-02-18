@@ -79,7 +79,7 @@ namespace Palace.Controllers
     [HttpPost]
     public ActionResult Edit(Bouquet bouquet)
     {
-      if (!ModelState.IsValid)
+      if (ModelState.IsValid)
       {
         bouquet.Price = CalculatePrice(bouquet.Size);
 
