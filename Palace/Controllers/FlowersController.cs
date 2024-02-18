@@ -26,5 +26,19 @@ namespace Palace.Controllers
     {
       return View();
     }
+    [HttpPost]
+    public ActionResult Create(Flower flower)
+    {
+      if (!ModelState.IsValid)
+      {
+        return View(flower);
+      }
+      else
+      {
+        _db.Flowers.Add(flower);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
+    }
   }
 }

@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+@model Palace.Models.Flower
+
+<h2>Add Flowers</h2>
+<hr />
+@using (Html.BeginForm())
+{
+  <Label for="FlowerId">Select Flower:</Label>
+  @Html.DropDownListFor(model => model.FlowerId)
+  <br />
+  @Html.LabelFor(model => model.Size)
+  @Html.DropDownListFor(model => model.Size, new SelectList(new[]
+  {
+    new SelectListItem { Text = "Small", Value = "Small"},
+    new SelectListItem { Text = "Medium", Value = "Medium"},
+    new SelectListItem { Text = "Large", Value = "Large"},
+    new SelectListItem { Text = "X-Large", Value = "X-Large"},
+  }, "Value", "Text"), "Select Size")
+  @Html.ValidationMessageFor(model => model.Size, "")
+  <input type="submit" value="Create"  />
+}
