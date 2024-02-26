@@ -1,34 +1,27 @@
 @{
-  Layout = "_Layout";
+    Layout = "_Layout";
 }
 
-@model Palace.ViewModels.FlowerViewModel
+@model Palace.Models.Flower
 
 <h2>Select Flower</h2>
 @using (Html.BeginForm())
 {
-    <div>
-        @Html.CheckBoxFor(model => model.IsBouquet, new { @class = "form-check-input" })
-        @Html.LabelFor(model => model.IsBouquet, "Add to Bouquet", new { @class = "form-check-label" })
-    </div>
-    <div>
-        @Html.LabelFor(model => model.FlowerId)
-        @Html.DropDownListFor(model => model.FlowerId, Model.FlowerOptions, "Select Flower")
-        @Html.ValidationMessageFor(model => model.FlowerId)
-    </div>
-    <div>
-        @Html.LabelFor(model => model.Quantity)
-        @Html.EditorFor(model => model.Quantity)
-        @Html.ValidationMessageFor(model => model.Quantity)
-    </div>
+    @Html.CheckBoxFor(model => model.IsBouquet, new { @class = "form-check-input" })
+    @Html.LabelFor(model => model.IsBouquet, "Add to Bouquet", new { @class = "form-check-label" })
+
+    @Html.LabelFor(model => model.FlowerId)
+    @Html.DropDownList("FlowerId", (IEnumerable<SelectListItem>)ViewBag.FlowerOptions, "Select Flower")
+    @Html.ValidationMessageFor(model => model.FlowerId)
+
     <div id="bouquetFields" style="display: none;">
         <div>
-            @Html.LabelFor(model => model.BouquetName)
-            @Html.EditorFor(model => model.BouquetName)
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name)
         </div>
         <div>
-            @Html.LabelFor(model => model.BouquetSize)
-            @Html.EditorFor(model => model.BouquetSize)
+            @Html.LabelFor(model => model.Size)
+            @Html.EditorFor(model => model.Size)
         </div>
     </div>
     <input type="submit" value="Submit">
@@ -39,7 +32,8 @@
     <script>
         $(document).ready(function () {
             $('#IsBouquet').change(function () {
-                if ($(this).is(':checked')) {
+                var isChecked = $(this).is(':checked');
+                if (isChecked) {
                     $('#bouquetFields').show();
                 } else {
                     $('#bouquetFields').hide();

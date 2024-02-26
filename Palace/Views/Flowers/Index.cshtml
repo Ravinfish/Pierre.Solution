@@ -14,7 +14,7 @@ else
 {
   @foreach (Flower flower in Model)
   {
-    <h4>@Html.ActionLink($"{flower.Name}", "Details", new { id = flower.FlowerId })
+    <h4>@Html.ActionLink($"{flower.Type}", "Details", new { id = flower.FlowerId })
     </h4>
   }
 }

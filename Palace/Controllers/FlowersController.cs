@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Palace.Models;
-using Palace.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -25,55 +24,38 @@ namespace Palace.Controllers
     }
     public ActionResult Create()
     {
-      List<(int FlowerId, string Name, string Description)> flowerTypes = new List<(int, string, string)>
-      {
-        (1, "Rose", "A beautiful flower often associated with love and romance"),
-        (2, "Tulip", "Colorful flowers symbolizing perfect love and springtime"),
-        // Add more flower types with descriptions
-      };
-
-
-      FlowerViewModel viewModel = new FlowerViewModel
-      {
-        FlowerOptions = flowerTypes.Select(f => new SelectListItem
-        {
-          Value = f.FlowerId.ToString(),
-          Text = f.Name + " - " + f.Description
-        }).ToList()
-      };
-
-      return View(viewModel);
+      return View();
     }
     [HttpPost]
-    public ActionResult Create(FlowerViewModel viewModel)
+    public ActionResult Create(Flower Flower)
     {
-      if (!ModelState.IsValid)
+      List<(int FlowerId, string Type, string Description, decimal Price)> flowerTypes = new List<(int, string, string, decimal)>
       {
-        return View(viewModel);
-      }
+        (1, "Rose", "A beautiful flower often associated with love and romance", 3.99m),
+        (2, "Tulip", "Colorful flowers symbolizing perfect love and springtime", 2.99m),
+        (3, "Sunflower", "Large, bright flowers that resemble the sun and symbolize adoration and loyalty", 4.99m),
+        (4, "Lily", "Elegant flowers with a sweet fragrance often used in weddings and funerals", 5.99m),
+        (5, "Daisy", "Simple yet cheerful flowers with a yellow center and white petals", 2.99m),
+        (6, "Carnation", "Popular flowers available in a variety of colors, symbolizing love and fascination", 1.99m),
+        (7, "Orchid", "Exotic flowers known for their stunning beauty and elegance", 7.99m),
+        (8, "Hydrangea", "Clusters of small flowers in various colors, symbolizing gratitude and heartfelt emotions", 3.99m),
+        (9, "Peony", "Fragrant flowers with large, delicate petals, often used in bridal bouquets", 3.99m),
+        (10, "Chrysanthemum", "Long-lasting flowers available in a wide range of colors, symbolizing joy and longevity", 5.99m)
+        // Add more flower types with descriptions as needed
+      };
 
-      if (viewModel.IsBouquet)
+      ViewBag.FlowerOptions = flowerTypes.Select(f => new SelectListItem
       {
-        
-        Flower selectedFlower = _db.Flowers.Find(viewModel.FlowerId);
-        if (selectedFlower != null)
-        {
-          // Process adding flower to bouquet with specified name and size
-          // You can access viewModel.BouquetName and viewModel.BouquetSize here
-        }
-      }
-      else
-      {
-        
-        Flower selectedFlower = _db.Flowers.Find(viewModel.FlowerId);
-        if (selectedFlower != null)
-        {
-          // Process single flower purchase with specified quantity
-          // You can access viewModel.Quantity here
-        }
-      }
-
-      return RedirectToAction("Index");
+        Value = f.FlowerId.ToString(),
+        Text = $"{f.Type} - ${f.Price}",
+      }).ToList();
+      
+      return View();
+     
     }
+
+
+
+  
   }
 }
