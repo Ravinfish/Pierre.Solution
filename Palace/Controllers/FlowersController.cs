@@ -26,9 +26,9 @@ namespace Palace.Controllers
     {
       return View();
     }
-    
+
     [HttpPost]
-    public ActionResult Create(Flower Flower)
+    public async Task<ActionResult> Create(int Flower)
     {
       List<(int FlowerId, string Type, string Description, decimal Price)> flowerTypes = new List<(int, string, string, decimal)>
       {
@@ -45,13 +45,35 @@ namespace Palace.Controllers
         // Add more flower types with descriptions as needed
       };
 
-      ViewBag.FlowerOptions = flowerTypes.Select(f => new SelectListItem
+      (int FlowerId, string Type, string Description, decimal Price) selectedFlower = flowerTypes.FirstOrDefault(f => f.FlowerId == flowerId);
+
+      if (selectedFlower != default)
       {
-        Value = f.FlowerId.ToString(),
-        Text = $"{f.Type} - ${f.Price}",
-      }).ToList();
+        Flower newFlower = new Flower
+        {
+          Type = selectedFlower.Type,
+          Description = selectedFlower.Description,
+          Price = selectedFlower.Price,
+          IsBouquet = false
+        };
+
+        _db.Flowers.Add(newFlower);
+
+        await _db.SaveChangesAsync();
+
+        return RedirectToAction("Index", "Flowers");
+        
+      }
+
+      return NotFound();
+
+      // ViewBag.FlowerOptions = flowerTypes.Select(f => new SelectListItem
+      // {
+      //   Value = f.FlowerId.ToString(),
+      //   Text = $"{f.Type} - ${f.Price}",
+      // }).ToList();
       
-      return View();
+      // return View();
      
     }
 
