@@ -28,7 +28,7 @@ namespace Palace.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create(int Flower)
+    public async Task<ActionResult> Create(int flowerId)
     {
       List<(int FlowerId, string Type, string Description, decimal Price)> flowerTypes = new List<(int, string, string, decimal)>
       {
