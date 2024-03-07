@@ -26,6 +26,7 @@ namespace Palace.Controllers
     {
       return View();
     }
+    
     [HttpPost]
     public ActionResult Create(Flower Flower)
     {

@@ -16,13 +16,13 @@
 
     <div id="bouquetFields" style="display: none;">
         <div>
-            @Html.LabelFor(model => model.Name)
-            @Html.EditorFor(model => model.Name)
+            @Html.LabelFor(model => model.Type)
+            @Html.EditorFor(model => model.Type)
         </div>
-        <div>
+        @* <div>
             @Html.LabelFor(model => model.Size)
             @Html.EditorFor(model => model.Size)
-        </div>
+        </div> *@
     </div>
     <input type="submit" value="Submit">
 }
